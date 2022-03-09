@@ -1,0 +1,22 @@
+{
+  "name": "express-note-taker",
+  "version": "1.0.0",
+  "description": "A Node.js application that save notes so that the user can organize their thoughts and keep track of tasks they need to complete.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpmurphy11/Express-Note-Taker.git"
+  },
+  "author": "don murphy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dpmurphy11/Express-Note-Taker/issues"
+  },
+  "homepage": "https://github.com/dpmurphy11/Express-Note-Taker#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
