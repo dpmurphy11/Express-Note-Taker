@@ -16,56 +16,16 @@ app.use(express.json());
 // expose all file in public dir
 app.use(express.static('public'));
 
-app.get('/api/notes', (req, res) => {
-  fs.readFile(db, 'utf-8', (err, data) => {
-    res.json(notesData);
-  });
-});
-
-app.post('/api/notes', (req, res) => {
-  const { title, text } = req.body;
-
-  if (req.body) {
-    const newNote = {
-      title,
-      text,
-      noteId: uuid.v4(),
-    };
-
-    readAndAppend(newNote, db);
-    res.json(`Note added successfully `);
-  } else {
-    res.error('Error in adding tip');
-  }
-});
-
-app.delete('/api/notes/:id', (req, res) => {
-  const { title, text } = req.body;
-
-  if (req.body) {
-    const thisNote = {
-      title,
-      text,
-      noteId: req.query
-    };
-
-    readAndRemove(thisNote, db);
-    res.json(`Note deleted successfully `);
-  } else {
-    res.error('Error in adding tip');
-  }
-});
-
 const readAndRemove = (content, file) => {
-  console.log(content);
+  // read json file, delete object from file, write file
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
-      parsedData.pop(content);
-      fs.writeFile(file, JSON.stringify(parsedData, null, 4), err => {
-        err ? console.error(err) : console.info(`\nData written to ${file}`)
+      let arrNew = parsedData.filter((item) => item.id !== content.id);
+      fs.writeFile(file, JSON.stringify(arrNew, null, 4), err => {
+        err ? console.error(err) : console.info(`\nData deleted from ${file}`)
       });
     }
   });
@@ -77,6 +37,7 @@ const readAndAppend = (content, file) => {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
+      console.log('data to append' + parsedData)
       parsedData.push(content);
       fs.writeFile(file, JSON.stringify(parsedData, null, 4), err => {
         err ? console.error(err) : console.info(`\nData written to ${file}`)
@@ -85,10 +46,45 @@ const readAndAppend = (content, file) => {
   });
 };
 
+app.get('/api/notes', (req, res) => {
+  fs.readFile(db, 'utf-8', (err, data) => {
+    res.json(JSON.parse(data));
+  });
+});
 
-app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public/notes.html'))
-);
+app.post('/api/notes', (req, res) => {
+  const { title, text } = req.body;
+
+  if (req.body) {
+    const newNote = {
+      title,
+      text,
+      id: uuid.v4(),
+    };
+
+    readAndAppend(newNote, db);
+    res.json(`Note added successfully `);
+  } else {
+    res.error('Error in adding tip');
+  }
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+
+  //get the note id from query param
+  const requestedId = req.params.id;
+
+  // Iterate through the notes id to check if it matches `req.params.id`
+  for (let i = 0; i < notesData.length; i++) {
+    if (requestedId === notesData[i].id) {
+      readAndRemove(notesData[i], db), err => {
+        err ? console.error(err) : console.info(`\nData deleted from ${file}`)
+      }
+    }
+  }
+});
+
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 
 // fallback route
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
