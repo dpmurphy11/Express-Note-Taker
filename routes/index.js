@@ -1,8 +1,8 @@
 const express = require('express');
-const router = require('express').Router();
+// const router = require('express').Router();
 const uuid = require('uuid');
-const { readFromFile, readAndAppend, readAndRemove } = require('../helpers/fsUtils');
-const notesData = require('../db/db.json');
+const { writeToFile, readFromFile, readAndAppend } = require('../helpers/fsUtils');
+// const notesData = require('../db/db.json');
 const db = './db/db.json';
 
 const app = express();
@@ -33,13 +33,13 @@ app.delete('/notes/:id', (req, res) => {
     //get the note id from query param
     const requestedId = req.params.id;
 
-    // Iterate through the notes id to check if it matches `req.params.id`
-    for (let i = 0; i < notesData.length; i++) {
-        if (requestedId === notesData[i].id) {
-            readAndRemove(notesData[i], db);
-            res.json('Note removed successfully.');
-        }
-    }
+    readFromFile(db)
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      let retJSON = json.filter((note) => note.id !== requestedId);
+      writeToFile('./db/db.json', retJSON);
+      res.json('Note deleted successfully');
+    });
 });
 
 module.exports = app;
