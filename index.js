@@ -1,10 +1,6 @@
-// const fs = require('fs');
 const express = require('express');
 const path = require('path');
-// const api = require('../  ./routes/index.js');
 const api = require('./routes/index');
-// const notesData = require('./db/db.json');
-// const db = './db/db.json';
 
 const app = express();
 const PORT = process.env.port || 3001;

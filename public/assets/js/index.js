@@ -69,8 +69,8 @@ const handleNoteSave = () => {
   });
 };
 
-const deleteNote = (id) => {
-    fetch(`/api/notes/${id}`, {
+const deleteNote = async (id) => {
+    await fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -90,11 +90,10 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
-  // deleteNote(noteId).then(() => {
-    deleteNote(noteId);
+  deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
-  // });
+  });
 };
 
 // Sets the activeNote and displays it
