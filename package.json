@@ -2,7 +2,7 @@
   "name": "express-note-taker",
   "version": "1.0.0",
   "description": "A Node.js application that save notes so that the user can organize their thoughts and keep track of tasks they need to complete.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/dpmurphy11/Express-Note-Taker#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.3",
     "uuid": "^8.3.2"
   }
