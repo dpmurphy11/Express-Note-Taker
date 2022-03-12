@@ -3,5 +3,25 @@
         "title": "Test Note",
         "text": "Test note text",
         "id": "37ea7d7e-549a-4668-9138-df031d50836a"
+    },
+    {
+        "title": "Study MySQL",
+        "text": "Every day",
+        "id": "e414efab-3edd-4443-bb7c-25c37de1980e"
+    },
+    {
+        "title": "Submit Homework",
+        "text": "Every Saturday by midnight",
+        "id": "2f07dcbd-8b77-4573-b461-951490855ab2"
+    },
+    {
+        "title": "Walk the dog",
+        "text": "mornings",
+        "id": "ec5cc42e-f182-4218-9dc4-f0fd3531d62c"
+    },
+    {
+        "title": "Get Extra Help",
+        "text": "During office hours on Saturday",
+        "id": "fb9ce1b5-fa74-44a2-8052-97f7eb012d68"
     }
 ]
