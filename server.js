@@ -18,5 +18,5 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.
 // fallback route
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
 
-app.listen(PORT, "0.0.0.0", () => console.log("Listening on Port 3000"));
+app.listen(PORT, "0.0.0.0", () => console.log(`Listening on Port: ${PORT}`));
 // app.listen(PORT);
