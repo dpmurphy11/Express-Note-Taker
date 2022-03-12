@@ -3,7 +3,7 @@ const path = require('path');
 const api = require('./routes/index');
 
 const app = express();
-const PORT = process.env.port || 3001;
+const PORT = process.env.port || 5000;
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
